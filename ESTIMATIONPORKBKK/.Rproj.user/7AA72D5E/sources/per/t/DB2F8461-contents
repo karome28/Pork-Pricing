@@ -1,0 +1,71 @@
+BKK1W1 <-read.csv("/2022/For estimation/ราคาWet1(1.1.65-5.5.65)/BKK1W1.csv")
+library(tidyverse)
+#real_price = ราคาหมูเป็น ขายจริง
+#เอาหมูซีก ราคาต่อกก
+half_pig<- BKK1W1 %>% filter(rProduct_code == 23068096)
+half_pig<- half_pig %>% filter(rGross_price <= 1000)
+
+#เลือก 3 วัน ราคา และรหัสสินค้า
+half_pig <- half_pig %>%
+  select(rProduct_code, rGross_price, sEffective_date_p)
+
+#เปลี่ยนเป็นค.ศ.
+half_pig <- half_pig %>% mutate(sEffective_date_p=as.Date(sEffective_date_p, format = "%d/%m/%Y"))
+d1 <- (half_pig$sEffective_date_p %m-% years(543))
+
+#get week number
+week_num = strftime(half_pig$sEffective_date_p, format = "%V")
+half_pig <- cbind(half_pig,week_num)
+
+write.csv(half_pig, file = "halfpigBKK1.csv")
+
+#get number of data to match with SL
+half_pigprice <- read.csv("/2022/For estimation/ESTIMATIONPORK/halfpigBKK.csv")
+
+#change class
+halfpigprice <- half_pigprice$rGross_price
+halfpigprice <- as.numeric(halfpigprice)
+
+sumshoulder <- cbind(sumshoulder, halfpigprice)
+sumshoulder <- sumshoulder %>% slice(1:17)
+
+sumthigh <- cbind(sumthigh, halfpigprice) 
+sumthigh <- sumthigh %>% slice(1:17)
+
+sumbelly <- cbind(sumbelly, halfpigprice)
+sumbelly <- sumbelly %>% slice(1:17)
+
+sumgrilled_neck <- cbind(sumgrilled_neck, halfpigprice)
+sumgrilled_neck <- sumgrilled_neck %>% slice(1:17)
+
+sumneck <- cbind(sumneck, halfpigprice)
+sumneck <- sumneck %>% slice(1:17)
+
+summeat <- cbind(summeat, halfpigprice)
+summeat <- summeat %>% slice(1:17)
+
+sumtenderloin <- cbind(sumtenderloin, halfpigprice)
+sumtenderloin <- sumtenderloin %>% slice(1:17)
+
+sumsirloin <- cbind(sumsirloin, halfpigprice)
+sumsirloin <- sumsirloin %>% slice(1:17)
+
+sumribs <- cbind(sumribs, halfpigprice)
+sumribs <- sumribs %>% slice(1:17)
+
+Sys.setlocale(locale = "Thai")
+real_price <- read.csv("/2022/For estimation/real_price.csv")
+sumshoulder <- cbind(sumshoulder, pig_alive_price = real_price$BKK)
+sumthigh <- cbind(sumthigh, pig_alive_price = real_price$BKK)
+sumbelly <- cbind(sumbelly, pig_alive_price = real_price$BKK)
+sumgrilled_neck <- cbind(sumgrilled_neck, pig_alive_price = real_price$BKK)
+sumneck <- cbind(sumneck, pig_alive_price = real_price$BKK)
+summeat <- cbind(summeat, pig_alive_price = real_price$BKK)
+sumtenderloin <- cbind(sumtenderloin, pig_alive_price = real_price$BKK)
+sumsirloin <- cbind(sumsirloin, pig_alive_price = real_price$BKK)
+sumribs <- cbind(sumribs, pig_alive_price = real_price$BKK)
+
+pig_alive_price <- real_price$BKK
+halfpigprice <- halfpigprice[-c(18)]
+halfpigprice <- halfpigprice[-c(16,17)]
+pig_alive_price <- pig_alive_price[-c(16,17)]

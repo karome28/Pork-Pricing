@@ -1,0 +1,72 @@
+MAINBKK <- read.csv("/2022/For estimation/ESTIMATIONPORK/MAINBKK.csv")
+Weekly <- read.csv("/2022/For estimation/Weekly2022_Price_SL.csv")
+Sys.setlocale(locale = "Thai")
+
+
+sumshoulder <- MAINBKK %>% filter(Product_code == 23057672)
+colnames(sumshoulder) <- c("Product_code","Product_name","Price_kg","date","week")
+print(sumshoulder)
+
+sumgrilled_neck <- MAINBKK %>% 
+  filter(Product_code == 23057671)
+colnames(sumgrilled_neck) <- c("Product_code","Product_name","Price_kg","date","week")
+print(sumgrilled_neck)
+
+sumthigh <- MAINBKK %>% 
+  filter(Product_code == 23057673)
+colnames(sumthigh) <- c("Product_code","Product_name","Price_kg","date","week")
+print(sumthigh)
+
+sumneck <- MAINBKK %>% 
+  filter(Product_code == 23057676)
+colnames(sumneck) <- c("Product_code","Product_name","Price_kg","date","week")
+print(sumneck)
+
+sumsirloin <- MAINBKK %>% 
+  filter(Product_code == 23057674)
+colnames(sumsirloin) <- c("Product_code","Product_name","Price_kg","date","week")
+print(sumsirloin)
+
+sumtenderloin <- MAINBKK %>% 
+  filter(Product_code == 23057675)
+colnames(sumtenderloin) <- c("Product_code","Product_name","Price_kg","date","week")
+print(sumtenderloin)
+
+sumbelly <- MAINBKK %>% 
+  filter(Product_code == 23057677)
+colnames(sumbelly) <- c("Product_code","Product_name","Price_kg","date","week")
+print(sumbelly)
+
+sumribs <- MAINBKK %>% 
+  filter(Product_code == 23057678)
+colnames(sumribs) <- c("Product_code","Product_name","Price_kg","date","week")
+print(sumribs)
+
+summeat <- MAINBKK %>% 
+  filter(Product_code == 23069300)
+colnames(summeat) <- c("Product_code","Product_name","Price_kg","date","week")
+print(summeat)
+
+
+
+
+#delete comma
+'''Order <- gsub(",", "", sumshoulder$Order) 
+Delivery <- gsub(",", "", sumshoulder$Delivery) 
+as.numeric(Order)
+as.numeric(Delivery)
+
+sumshoulder <- cbind(sumshoulder,Order,Delivery)
+sumshoulder$Order <-NULL
+sumshoulder$Delivery <- NULL
+
+sumshoulder <- sumshoulder %>% slice(1:15)
+Delivery <- sumshoulder$Delivery
+Delivery <- as.numeric(Delivery)
+Order <- sumshoulder$Order
+Order <- as.numeric(Order)
+SL <- Delivery/Order
+DIFF <- Delivery-Order
+
+sumshoulder <- cbind(sumshoulder, SL)'''
+

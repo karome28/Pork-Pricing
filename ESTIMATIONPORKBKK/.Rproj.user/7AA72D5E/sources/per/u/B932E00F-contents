@@ -1,0 +1,20 @@
+library(tidyverse)
+library(readr)
+Sys.setlocale(locale = "Thai")
+Wk5_price_comp_BKK<- read.csv("/2022/For estimation/competitor/Price_Competition_Wk5.csv")
+
+#delete row and หมูบดnoprice
+Wk5_price_comp_BKK <- Wk5_price_comp_BKK[-c(1:4,12,14:52), ]
+#delete column
+Wk5_price_comp_BKK <- subset(Wk5_price_comp_BKK, select = -c(5:17) )
+Wk5_price_comp_BKK
+week5 <- c(5,5,5,5,5,5,5,5)
+Wk5_price_comp_BKK <- cbind(Wk5_price_comp_BKK,week5)
+colnames(Wk5_price_comp_BKK) <- c("Part","ซีพี","เบทาโกร","ไทยฟู้ดส์","week")
+Wk5_price_comp_BKK
+
+
+
+#x12new = x12[sample(1:nrow(x12), 100), c(1,2)]
+#x12new = merge(x12new, x12, by=c("Var1","Var2"), all.x=TRUE)
+#x12new
