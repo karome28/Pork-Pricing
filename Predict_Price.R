@@ -13,7 +13,7 @@ sumthigh$Betagro_s <- (sumthigh$Betagro - sumthigh$Betagro_m)/sumthigh$Betagro_s
 sumthigh$quota_s <- (sumthigh$quota - sumthigh$quota_m)/sumthigh$quota_sd
 modelthigh <- lm(sumthigh$Price_kg ~ sumthigh$CP + sumthigh$`Mid Remainder` + sumthigh$Betagro + sumthigh$quota)
 modelthigh_s <- lm(sumthigh$Price_kg ~ sumthigh$CP_s + sumthigh$Mid_Remainder_s +sumthigh$Betagro_s + sumthigh$quota_s)
-
+เจ้าพีท
 
 #thigh_m <- 151.69+(11.95*((127-sumthigh$halfpigprice_m)/sumthigh$halfpigprice_sd)) + (0.99*((2141-sumthigh$Mid_Remainder_m)/sumthigh$Mid_Remainder_sd)) + (-0.164*((115368-sumthigh$quota_m)/sumthigh$quota_sd))
 #summary(thigh_m)
